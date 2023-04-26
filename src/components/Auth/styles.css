@@ -1,0 +1,21 @@
+
+  .paper {
+    margin-top: "10rem";
+    display: "flex";
+    flex-direction: "column";
+    justify-content: "center";
+    align-items: "center";
+    padding: "2px";
+  }
+ .form {
+    width: "95%";
+    /* //maring: "1rem 1rem", */
+    margin-top: "1rem";
+  }
+  .avatar {
+    margin: "1rem";
+  }
+  .submit {
+      margin: "1rem 0";
+  }
+
