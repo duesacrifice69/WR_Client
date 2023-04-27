@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./styles.css";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUserDataSuccess, getUserDataFailiure } from "../../state/Auth";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
@@ -19,6 +21,7 @@ const initState = { email: "", password: "" };
 
 const Auth = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initState);
   const [error, setError] = useState("");
@@ -37,10 +40,12 @@ const Auth = () => {
 
     try {
       const data = await api.signin(formData);
+      dispatch(getUserDataSuccess(data.result));
       localStorage.setItem("authToken", data.token);
       navigate("/home");
     } catch (error) {
       setError(error.response.data.error);
+      dispatch(getUserDataFailiure(error.response.data.error));
       //  console.log(error);
       setTimeout(() => {
         setError("");

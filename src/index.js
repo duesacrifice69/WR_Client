@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { applyMiddleware, compose, createStore } from "redux";
 import { Provider } from "react-redux";
 import globalReducer from "./state/Mode";
+import userReducer from "./state/Auth";
 import App from "./App";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -12,6 +12,7 @@ import { configureStore } from "@reduxjs/toolkit";
 const store = configureStore({
   reducer: {
     global: globalReducer,
+    user: userReducer,
   },
 });
 
