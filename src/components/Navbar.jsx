@@ -2,18 +2,24 @@ import React, { useState } from 'react'
 import { LightModeOutlined, DarkModeOutlined, Menu as MenuIcon, Search, SettingsOutlined, ArrowDropDownOutlined } from '@mui/icons-material';
 import FlexBetween from './FlexBetween';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { setMode } from '../state/Mode';
 import { AppBar, IconButton, Toolbar, useTheme, InputBase, Button, Box, Typography, MenuItem,Menu } from '@mui/material';
 import profileImage from "../assets/profile.jpeg";
 
 
 const Navbar = ({userData, isSidebarOpen, setIsSidebarOpen, isNonMobile}) => {
+    const navigate =useNavigate();
     const dispatch = useDispatch();
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
     const isOpen = Boolean(anchorEl);
     const handleClick = (event) => setAnchorEl(event.currentTarget);
-    const handleClose = () => setAnchorEl(null);
+    const handleClose = () => {
+        setAnchorEl(null)
+        localStorage.clear();
+        navigate('/');
+    };
   return (
     <AppBar
         sx={{

@@ -4,6 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import globalReducer from "./state/Mode";
 import userReducer from "./state/Auth";
+import appReducer from "./state/ApplicationContext";
 import App from "./App";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -13,6 +14,7 @@ const store = configureStore({
   reducer: {
     global: globalReducer,
     user: userReducer,
+    app: appReducer,
   },
 });
 

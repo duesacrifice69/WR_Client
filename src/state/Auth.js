@@ -14,8 +14,13 @@ const userSlice = createSlice({
     getUserDataFailiure(state, action) {
       state.error = action.payload;
     },
+    logOut(state, action) {
+      state.data = null;
+      state.error = null;
+    },
   },
 });
 
-export const { getUserDataSuccess, getUserDataFailiure } = userSlice.actions;
+export const { getUserDataSuccess, getUserDataFailiure, logOut } =
+  userSlice.actions;
 export default userSlice.reducer;

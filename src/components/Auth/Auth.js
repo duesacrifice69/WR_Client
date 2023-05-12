@@ -4,6 +4,7 @@ import Input from "./Input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUserDataSuccess, getUserDataFailiure } from "../../state/Auth";
+import { setMenu } from "../../state/ApplicationContext";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
@@ -37,12 +38,19 @@ const Auth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    var userRoleId = 0;
     try {
       const data = await api.signin(formData);
       dispatch(getUserDataSuccess(data.result));
+      userRoleId = data.result.UserRoleId;
       localStorage.setItem("authToken", data.token);
-      navigate("/home");
+      try {
+        const menuItems = await api.getMenuItems(userRoleId);
+        dispatch(setMenu(menuItems.result));
+        navigate("/home");
+      } catch (error) {
+        dispatch(getUserDataFailiure(error.response.data.error));
+      }
     } catch (error) {
       setError(error.response.data.error);
       dispatch(getUserDataFailiure(error.response.data.error));

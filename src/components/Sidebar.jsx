@@ -1,84 +1,26 @@
 import React from 'react'
-import {Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme } from '@mui/material';
+import {Box, Divider, Drawer, IconButton, List, ListItemButton, ListItemIcon, ListItemText, Typography, useTheme, Collapse  } from '@mui/material';
 import {
     SettingsOutlined,
     ChevronLeft,
-    ChevronRightOutlined,
     HomeOutlined,
-    ShoppingCartOutlined,
-    Groups2Outlined,
-    ReceiptLongOutlined,
-    PublicOutlined,
-    PointOfSaleOutlined,
-    TodayOutlined,
-    CalendarMonthOutlined,
-    AdminPanelSettingsOutlined,
-    TrendingUpOutlined,
-    PieChartOutlined,
+    BusinessOutlined,
+    LocalShippingOutlined,
+    Paid,
+    CurrencyExchange,
+    ManageAccounts,
+    Assessment,
+    ExpandLess,
+    ExpandMore
   } from "@mui/icons-material";
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import FlexBetween from './FlexBetween';
 import profileImage from "../assets/profile.jpeg";
+import SidebarItem from './SidebarItem';
 
-const navItems = [
-    {
-      text: "Dashboard",
-      icon: <HomeOutlined />,
-    },
-    {
-      text: "Client Facing",
-      icon: null,
-    },
-    {
-      text: "Products",
-      icon: <ShoppingCartOutlined />,
-    },
-    {
-      text: "Customers",
-      icon: <Groups2Outlined />,
-    },
-    {
-      text: "Transactions",
-      icon: <ReceiptLongOutlined />,
-    },
-    {
-      text: "Geography",
-      icon: <PublicOutlined />,
-    },
-    {
-      text: "Sales",
-      icon: null,
-    },
-    {
-      text: "Overview",
-      icon: <PointOfSaleOutlined />,
-    },
-    {
-      text: "Daily",
-      icon: <TodayOutlined />,
-    },
-    {
-      text: "Monthly",
-      icon: <CalendarMonthOutlined />,
-    },
-    {
-      text: "Breakdown",
-      icon: <PieChartOutlined />,
-    },
-    {
-      text: "Management",
-      icon: null,
-    },
-    {
-      text: "Admin",
-      icon: <AdminPanelSettingsOutlined />,
-    },
-    {
-      text: "Performance",
-      icon: <TrendingUpOutlined />,
-    },
-  ];
+
 
 const Sidebar = ({
     userData,
@@ -92,11 +34,18 @@ const Sidebar = ({
     const [active, setActive] = useState("");
     const navigate = useNavigate();
     const theme = useTheme();
-     console.log(userData);
+    const [open, setOpen] = useState(true);
+    const navItems = useSelector(state => state.app.menuItems);
     useEffect(() => {
         setActive(pathname.substring(1))
     }, [pathname]);
 
+    const handleClick = (isSubMenuAvl) => {
+      if(isSubMenuAvl) 
+         setOpen(!open);
+    }
+
+    
   return (
     <Box component="nav">
           {isSidebarOpen && (
@@ -131,55 +80,9 @@ const Sidebar = ({
                           )}
                         </FlexBetween>
                     </Box>
-                    <List>
-                    {navItems.map(({ text, icon }) => {
-                        if (!icon) {
-                        return (
-                            <Typography key={text} sx={{ m: "2.25rem 0 0.5rem 3rem" }}>
-                            {text}
-                            </Typography>
-                        );
-                        }
-                        const lcText = text.toLowerCase();
-
-                        return (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton
-                            onClick={() => {
-                                navigate(`/${lcText}`);
-                                setActive(lcText);
-                            }}
-                            sx={{
-                                backgroundColor:
-                                active === lcText
-                                    ? theme.palette.secondary[300]
-                                    : "transparent",
-                                color:
-                                active === lcText
-                                    ? theme.palette.primary[600]
-                                    : theme.palette.secondary[100],
-                            }}
-                            >
-                            <ListItemIcon
-                                sx={{
-                                ml: "2rem",
-                                color:
-                                    active === lcText
-                                    ? theme.palette.primary[600]
-                                    : theme.palette.secondary[200],
-                                }}
-                            >
-                                {icon}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                            {active === lcText && (
-                                <ChevronRightOutlined sx={{ ml: "auto" }} />
-                            )}
-                            </ListItemButton>
-                        </ListItem>
-                        );
-                    })}
-                </List>
+                    {/* <List> */}
+                      <SidebarItem navItems={navItems} /> 
+                    {/* </List> */}
                 </Box>
 
                     
