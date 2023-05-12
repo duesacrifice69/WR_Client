@@ -1,3 +1,5 @@
+
+
 .sidebar{
     width: 260px;
     flex-shrink: 0;
@@ -9,7 +11,7 @@
   
   .sidebar-item{
     padding: .75em 1em;
-    display: block;
+    display: flex;
     transition: background-color .15s;
     border-radius: 5px;
   }

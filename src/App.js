@@ -13,7 +13,9 @@ import { useMemo } from "react";
 import Auth from "./components/Auth/Auth";
 import { useSelector } from "react-redux";
 import Dashboard from "./Pages/Dashboard";
+import Company from "./Pages/Company/Company";
 import Layout from "./Pages/Layout";
+import Vehicle from "./Pages/Vehicle/Vehicle";
 
 const App = () => {
   const mode = useSelector((state) => state.global.mode);
@@ -27,6 +29,8 @@ const App = () => {
             <Route path="/" element={<Auth />} />
             <Route element={<Layout />}>
               <Route path="/home" element={<Dashboard />} />
+              <Route path="/company" element={<Company />} />
+              <Route path="/vehicle" element={<Vehicle />} />
             </Route>
           </Routes>
         </ThemeProvider>
