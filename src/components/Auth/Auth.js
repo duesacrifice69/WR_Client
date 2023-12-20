@@ -125,7 +125,6 @@ const Auth = () => {
                 Sign In
               </Button>
             </Grid>
-            {error && <div>{error}</div>}
           </form>
         </Paper>
       </Container>

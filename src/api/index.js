@@ -21,3 +21,9 @@ export const getMenuItems = async (userRoleId) => {
   );
   return response.data;
 };
+
+export const getAllCompanies = async () => {
+  const response = await API.get("company/companies");
+
+  return response.data;
+};

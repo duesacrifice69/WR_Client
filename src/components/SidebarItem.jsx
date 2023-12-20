@@ -95,8 +95,8 @@ const SidebarItem = ({ navItems }) => {
                     alignItems: "center",
                     color:
                       active === item.MenuId
-                        ? theme.palette.primary[600]
-                        : theme.palette.secondary[200],
+                        ? theme.palette.grey[100]
+                        : theme.palette.secondary[500],
                   }}
                 >
                   <ListItemIcon
@@ -104,8 +104,8 @@ const SidebarItem = ({ navItems }) => {
                       ml: isSubMenu ? "2rem" : "0rem",
                       color:
                         active === item.MenuId
-                          ? theme.palette.primary[600]
-                          : theme.palette.secondary[200],
+                          ? theme.palette.grey[100]
+                          : theme.palette.secondary[500],
                     }}
                   >
                     {navIcons.find((icon) => icon.text === item.IconName)?.icon}
@@ -120,8 +120,8 @@ const SidebarItem = ({ navItems }) => {
                           fontWeight: !isSubMenu && "500",
                           color:
                             active === item.MenuId
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                              ? theme.palette.grey[100]
+                              : theme.palette.secondary[500],
                         }}
                       >
                         {item.MenuName}
