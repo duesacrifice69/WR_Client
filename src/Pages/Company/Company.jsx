@@ -42,9 +42,8 @@ const Company = () => {
     fetchData();
   }, []);
 
-  const handleCreateNewRow = (values) => {
-    data.push(values);
-    setData([...data]);
+  const handleCreateNewCompany = async (values) => {
+    await api.createCompany(values);
   };
 
   const handleEditRow = (row) => {
@@ -151,19 +150,18 @@ const Company = () => {
 
   //  const csvExporter = new ExportToCsv(csvOptions);
 
-  const handleDeleteRow = useCallback(
-    (row) => {
-      if (
-        !alert(`Are you sure you want to delete ${row.getValue("firstName")}`)
-      ) {
-        return;
-      }
-      //send api delete request here, then refetch or update local table data for re-render
-      data.splice(row.index, 1);
-      setData([...data]);
-    },
-    [data]
-  );
+  const handleDeleteCompany = async (row) => {
+    // if (
+    alert(`Are you sure you want to delete ${row.getValue("CompanyName")}`);
+    // ) {
+    //   return;
+    // }
+    //send api delete request here, then refetch or update local table data for re-render
+    // data.splice(row.index, 1);
+    // setData([...data]);
+    const companyId = row.getValue("CompanyId");
+    await api.deleteCompany({ companyId: companyId });
+  };
 
   return (
     <Box m="0 2.5rem 1.5rem 2.5rem">
@@ -226,7 +224,7 @@ const Company = () => {
                 <Tooltip arrow placement="right" title="Delete">
                   <IconButton
                     color="error"
-                    onClick={() => handleDeleteRow(row)}
+                    onClick={() => handleDeleteCompany(row)}
                   >
                     <Delete />
                   </IconButton>
@@ -239,7 +237,7 @@ const Company = () => {
           columns={columns}
           open={createModalOpen}
           onClose={() => setCreateModalOpen(false)}
-          onSubmit={handleCreateNewRow}
+          onSubmit={handleCreateNewCompany}
           rowData={rowData}
           isEdit={isEdit}
         />
